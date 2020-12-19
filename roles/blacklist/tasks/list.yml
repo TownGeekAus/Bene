@@ -14,7 +14,7 @@
     line:  "{{ domain }}"
     create: yes
  
-- name: Add a line to blacklist
+- name: Add a line to /opt/zimbra/conf/amavisd.conf.in
   lineinfile:
     path:  /opt/zimbra/conf/amavisd.conf.in
     line:  read_hash(%whitelist_sender, '/opt/zimbra/conf/blacklist');
