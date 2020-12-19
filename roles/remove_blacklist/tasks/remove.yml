@@ -2,7 +2,7 @@
 
 - name: remove domain from blacklist
   lineinfile:
-    path: path: /opt/zimbra/conf/blacklist
+    path:  /opt/zimbra/conf/blacklist
     state: absent
     regexp: '{{ domain }}'
 
