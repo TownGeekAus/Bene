@@ -1,5 +1,0 @@
----
-
-- name: Zimbra White and Black List Configuration
-  roles: 
-   - zimbra

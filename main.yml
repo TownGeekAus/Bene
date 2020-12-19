@@ -1,0 +1,11 @@
+---
+
+- name: Zimbra White and Black List Configuration
+  roles: 
+   - blacklist
+  tags: blacklist
+
+- name: Zimbra White and Black List Configuration
+  roles: 
+   - whitelist
+  tags: whitelist

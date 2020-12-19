@@ -1,33 +1,17 @@
 ---
 
-- name: Create whitelist and  blacklist files
-  shell:  touch /opt/zimbra/conf/{whitelist,blacklist}
+- name: Create blacklist files
+  shell:  touch /opt/zimbra/conf/{blacklist}
 
-- name: Add a line to whitelist
+- name: Add a line to blacklist
   lineinfile:
-    path: /opt/zimbra/conf/whitelist
+    path: /opt/zimbra/conf/blacklist
     line:  {{ domain1 }}
     create: yes
-  tags: whitelist
-
-- name: Add a line to blacklist
-  lineinfile:
-    path: /opt/zimbra/conf/whitelist
-    line:  {{ domain2 }}
-    create: yes
-  tags: blacklist
-
-
-- name: Add a line to blacklist
-  lineinfile:
-    path:  /opt/zimbra/conf/amavisd.conf.in
-    line:  read_hash(%whitelist_sender, '/opt/zimbra/conf/whitelist');
-    create: yes
-  tags: whitelist
-
+ 
 - name: Add a line to blacklist
   lineinfile:
     path:  /opt/zimbra/conf/amavisd.conf.in
     line:  read_hash(%whitelist_sender, '/opt/zimbra/conf/blacklist');
     create: yes
-  tags: blacklist
+
