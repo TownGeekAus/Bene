@@ -18,7 +18,7 @@
   lineinfile:
     path:  /opt/zimbra/conf/amavisd.conf.in
     regexp: "'^'fake.com' => 10 '"
-    insertbefore: '^}; ' 
+    insertbefore: '}; ' 
     line:  "'{{ domain }}'  => 10"
 
     create: yes

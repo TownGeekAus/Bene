@@ -6,9 +6,3 @@
     create: yes
   tags: whitelist
 
-- name: Add a line to blacklist
-  lineinfile:
-    path:  /opt/zimbra/conf/amavisd.conf.in
-    line:  read_hash(%whitelist_sender, '/opt/zimbra/conf/blacklist');
-    create: yes
-  tags: blacklist
