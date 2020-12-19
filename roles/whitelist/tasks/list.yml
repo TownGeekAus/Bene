@@ -26,7 +26,7 @@
 - name: Execute the command zmamavisdctl to restart the service
   command: zmamavisdctl restart
   become: true
-  become_method: su
+  become_method: sudo
   become_user: zimbra
 
 
