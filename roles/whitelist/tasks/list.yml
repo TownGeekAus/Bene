@@ -23,9 +23,9 @@
     line:  "'{{ domain }}'  => 10"
 
 - name: Execute the command zmamavisdctl to restart the service
-  command: zmamavisdctl restart
+  command: su - zimbra -c "zmamavisdctl restart"
   become: true
   become_method: sudo
-  become_user: zimbra
+  
 
 
