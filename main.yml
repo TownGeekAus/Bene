@@ -5,3 +5,5 @@
       tags: blacklist
     - role: whitelist
       tags: whitelist
+    - role: remove_blacklist
+      tags: remove
