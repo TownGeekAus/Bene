@@ -6,7 +6,7 @@
 - name: Add a line to whitelist
   lineinfile:
     path: /opt/zimbra/conf/whitelist
-    line:  {{ domain }}
+    line: {{domain}}
     create: yes
 
 
