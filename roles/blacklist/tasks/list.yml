@@ -6,7 +6,7 @@
 - name: Add a line to blacklist
   lineinfile:
     path: /opt/zimbra/conf/blacklist
-    line:  {{ domain1 }}
+    line:  {{ domain }}
     create: yes
  
 - name: Add a line to blacklist
