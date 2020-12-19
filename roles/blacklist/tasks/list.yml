@@ -17,11 +17,9 @@
 - name: Add a line to /opt/zimbra/conf/amavisd.conf.in
   lineinfile:
     path:  /opt/zimbra/conf/amavisd.conf.in
-    regexp: "'^'fake.com' => 10 '"
-    insertbefore: '}; ' 
+    insertafter: "'fake.com' => 10"
     line:  "'{{ domain }}'  => 10"
 
-    create: yes
 
 - name: Execute the command zmamavisdctl to restart the service
   command: zmamavisdctl restart
