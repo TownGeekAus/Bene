@@ -1,7 +1,12 @@
 ---
 
-- name: Create blacklist files
-  shell:  touch /opt/zimbra/conf/{blacklist}
+- name: Create file blacklist ownership, group and permissions
+  file:
+    path: /opt/zimbra/conf/blacklist
+    owner: zimbra
+    group: zimbra
+    mode: '0644'
+    state: touch
 
 - name: Add a line to blacklist
   lineinfile:

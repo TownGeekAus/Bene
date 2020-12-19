@@ -1,12 +1,18 @@
 ---
 
-- name: Create whitelist and  whitelistt files
-  shell:  touch /opt/zimbra/conf/{whitelist}
+- name: Create file whitelist ownership, group and permissions
+  file:
+    path: /opt/zimbra/conf/whitelist
+    owner: zimbra
+    group: zimbra
+    mode: '0644'
+    state: touch
+
 
 - name: Add a line to whitelist
   lineinfile:
     path: /opt/zimbra/conf/whitelist
-    line: "{{ domain }}"
+    line: '{{ domain }}'
     create: yes
 
 
@@ -17,6 +23,7 @@
     create: yes
 
 - name: Execute the command zmamavisdctl to restart the service
-  shell: sudo su - zimbra -c "zmamavisdctl restart"
+  become: true
+  shell: su - zimbra -c "zmamavisdctl restart"
 
 

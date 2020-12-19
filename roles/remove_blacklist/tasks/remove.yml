@@ -1,0 +1,12 @@
+---
+
+- name: remove domain from blacklist
+  lineinfile:
+    path: path: /opt/zimbra/conf/blacklist
+    state: absent
+    regexp: '{{ domain }}'
+
+
+- name: Execute the command zmamavisdctl to restart the service
+  become: true
+  shell: su - zimbra -c "zmamavisdctl restart"
