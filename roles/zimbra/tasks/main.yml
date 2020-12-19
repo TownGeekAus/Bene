@@ -1,0 +1,4 @@
+---
+
+- name: add to the whitelist
+  include: whitelist.yml
