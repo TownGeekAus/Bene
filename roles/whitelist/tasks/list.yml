@@ -16,14 +16,17 @@
     create: yes
 
 
-- name: Add a line to whitelist
+- name: Add a line to /opt/zimbra/conf/amavisd.conf.in
   lineinfile:
     path:  /opt/zimbra/conf/amavisd.conf.in
-    line:  read_hash(%whitelist_sender, '/opt/zimbra/conf/whitelist');
-    create: yes
+    regexp: "'^'fake1.com' => 10 '"
+    insertafter: "'#'fake1.com' => 10 '" 
+    line:  "'{{ domain }}'  => 10"
 
 - name: Execute the command zmamavisdctl to restart the service
+  command: zmamavisdctl restart
   become: true
-  shell: su - zimbra -c "zmamavisdctl restart"
+  become_method: su
+  become_user: zimbra
 
 

@@ -6,7 +6,14 @@
     state: absent
     regexp: '{{ domain }}'
 
+- name: remove domain from blacklist
+  lineinfile:
+    path:  /opt/zimbra/conf/amavisd.conf.in
+    state: absent
+    regexp: "'{{ domain }}'  => 10"
 
 - name: Execute the command zmamavisdctl to restart the service
+  command: zmamavisdctl restart
   become: true
-  shell: su - zimbra -c "zmamavisdctl restart"
+  become_method: su
+  become_user: zimbra
