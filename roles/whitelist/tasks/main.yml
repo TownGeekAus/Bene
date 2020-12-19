@@ -1,0 +1,8 @@
+---
+
+- name: setup 
+  include: setup.yml
+
+
+- name: add to the list
+  include: list.yml
