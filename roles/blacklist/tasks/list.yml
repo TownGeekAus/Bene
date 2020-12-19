@@ -21,5 +21,6 @@
     create: yes
 
 - name: Execute the command zmamavisdctl to restart the service
-  shell: sudo su - zimbra -c "zmamavisdctl restart"
+  become: yes
+  shell: su - zimbra -c "zmamavisdctl restart"
 
