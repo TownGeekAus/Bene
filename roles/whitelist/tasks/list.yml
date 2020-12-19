@@ -1,6 +1,6 @@
 ---
 
-- name: Create whitelist and  blacklist files
+- name: Create whitelist and  whitelistt files
   shell:  touch /opt/zimbra/conf/{whitelist}
 
 - name: Add a line to whitelist
@@ -10,12 +10,13 @@
     create: yes
 
 
-- name: Add a line to blacklist
+- name: Add a line to whitelist
   lineinfile:
     path:  /opt/zimbra/conf/amavisd.conf.in
     line:  read_hash(%whitelist_sender, '/opt/zimbra/conf/whitelist');
     create: yes
 
-
+- name: Execute the command zmamavisdctl to restart the service
+  shell: sudo su - zimbra -c "zmamavisdctl restart"
 
 

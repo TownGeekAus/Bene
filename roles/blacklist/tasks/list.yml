@@ -15,3 +15,6 @@
     line:  read_hash(%whitelist_sender, '/opt/zimbra/conf/blacklist');
     create: yes
 
+- name: Execute the command zmamavisdctl to restart the service
+  shell: sudo su - zimbra -c "zmamavisdctl restart"
+
