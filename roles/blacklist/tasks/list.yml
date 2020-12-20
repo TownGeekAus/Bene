@@ -28,6 +28,6 @@
 - name: Execute the command zmamavisdctl to restart the service
   command: su - zimbra -c "zmmtactl restart && zmamavisdctl restart"
   become: true
-  become_method: su
+  become_method: sudo
  
 

@@ -2,15 +2,28 @@
 
 - name: remove domain from blacklist
   lineinfile:
-    path:  /opt/zimbra/conf/blacklist
+    path:   /opt/zimbra/conf/salocal.cf.in 
     state: absent
-    regexp: '{{ domain }}'
+    regexp:  "blacklist_from *{{ domain }}"
+
+- name: remove domain to spamassain filter  block email 
+  lineinfile:
+    path:  /opt/zimbra/conf/salocal.cf.in 
+    state: absent
+    line:   blacklist_from  {{ email }}
 
 - name: remove domain from blacklist
   lineinfile:
     path:  /opt/zimbra/conf/amavisd.conf.in
     state: absent
-    regexp: "'{{ domain }}'  => 10"
+    regexp: "'.{{ domain }}'  => 10.0,"
+
+
+- name: remove a line to /opt/zimbra/conf/amavisd.conf.in block email
+  lineinfile:
+    path:  /opt/zimbra/conf/amavisd.conf.in
+    state: absent
+    line:  "'{{ email }}'  => 10.0,"
 
 - name: Execute the command zmamavisdctl to restart the service
   command:  su - zimbra -c "zmamavisdctl restart"

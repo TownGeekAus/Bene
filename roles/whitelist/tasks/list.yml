@@ -1,29 +1,27 @@
 ---
 - name: Add domain to spamassain filter  whitelist domain
   lineinfile:
-    path:  /opt/zimbra/conf/amavisd.conf.in
-    insertafter: "whitelist_from *fake.com"
+    path:  /opt/zimbra/conf/salocal.cf.in 
     line:  "whitelist_from *{{ domain }}"
   
-- name: Add domain to spamassain filter whitelist email 
+- name: Add domain to spamassain filter  block email 
   lineinfile:
-    path:  /opt/zimbra/conf/amavisd.conf.in
-    insertafter: "blacklist_from *fake.com"
-    line:  "whitelist_from  {{ email }} "
+    path:  /opt/zimbra/conf/salocal.cf.in 
+    line:   whitelist_from  {{ email }}
 
 
 - name: Add a line to /opt/zimbra/conf/amavisd.conf.in whitelist domain
   lineinfile:
     path:  /opt/zimbra/conf/amavisd.conf.in
-    insertafter: "'.dali.mx' => -10.0,"
-    line:  "'.{{ domain }}'  => -10.0,"
+    insertbefore: "'.dali.mx'  => -10.0,"
+    line:  "'.{{ domain }}'  => 10.0,"
 
 
 - name: Add a line to /opt/zimbra/conf/amavisd.conf.in whitelist email
   lineinfile:
     path:  /opt/zimbra/conf/amavisd.conf.in
-    insertafter: "'.dali.mx' => -10.0,"
-    line:  "'{{ email }}'  => -10.0,"
+    insertbefore: "'.dali.mx'  => -10.0,"
+    line:  "'{{ email }}'  => 10.0,"
 
 
 
