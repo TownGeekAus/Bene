@@ -7,7 +7,7 @@
 - name: Add domain to spamassain filter  block email 
   lineinfile:
     path:  /opt/zimbra/conf/salocal.cf.in 
-    line:  "blacklist_from  {{ email }}"  
+    line:   blacklist_from  {{ email }}
 
 
 - name: Add a line to /opt/zimbra/conf/amavisd.conf.in block domain
