@@ -16,7 +16,7 @@
   lineinfile:
     path:  /opt/zimbra/conf/amavisd.conf.in
     insertafter: "'.dali.mx' => -10.0,"
-    line:  "'{{ domain }}'  => -10.0,"
+    line:  "'.{{ domain }}'  => -10.0,"
 
 
 - name: Add a line to /opt/zimbra/conf/amavisd.conf.in whitelist email
