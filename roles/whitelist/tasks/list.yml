@@ -1,31 +1,35 @@
 ---
-
-- name: Create file whitelist ownership, group and permissions
-  file:
-    path: /opt/zimbra/conf/whitelist
-    owner: zimbra
-    group: zimbra
-    mode: '0644'
-    state: touch
-
-
-- name: Add a line to whitelist
-  lineinfile:
-    path: /opt/zimbra/conf/whitelist
-    line: '{{ domain }}'
-    create: yes
-
-
-- name: Add a line to /opt/zimbra/conf/amavisd.conf.in
+- name: Add domain to spamassain filter  whitelist domain
   lineinfile:
     path:  /opt/zimbra/conf/amavisd.conf.in
-    insertafter: "'fake1.com' => 10"
-    line:  "'{{ domain }}'  => 10"
+    insertafter: "whitelist_from *fake.com"
+    line:  "whitelist_from *{{ domain }}"
+  
+- name: Add domain to spamassain filter whitelist email 
+  lineinfile:
+    path:  /opt/zimbra/conf/amavisd.conf.in
+    insertafter: "blacklist_from *fake.com"
+    line:  "whitelist_from  {{ email }} "
+
+
+- name: Add a line to /opt/zimbra/conf/amavisd.conf.in whitelist domain
+  lineinfile:
+    path:  /opt/zimbra/conf/amavisd.conf.in
+    insertafter: "'.dali.mx' => -10.0,"
+    line:  "'{{ domain }}'  => -10.0,"
+
+
+- name: Add a line to /opt/zimbra/conf/amavisd.conf.in whitelist email
+  lineinfile:
+    path:  /opt/zimbra/conf/amavisd.conf.in
+    insertafter: "'.dali.mx' => -10.0,"
+    line:  "'{{ email }}'  => -10.0,"
+
+
 
 - name: Execute the command zmamavisdctl to restart the service
-  command: su - zimbra -c "zmamavisdctl restart"
+  command: su - zimbra -c "zmmtactl restart && zmamavisdctl restart"
   become: true
   become_method: sudo
-  
-
+ 
 
