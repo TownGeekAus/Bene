@@ -1,10 +1,5 @@
 ---
 
-- name: Install DNS server
-  yum:
-    name: named 
-    state: present
-
 - name: Copy  named.conf file to the host
   copy:
     src: named.conf.j2
