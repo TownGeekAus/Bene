@@ -1,5 +1,5 @@
 ---
 - name: Install DNS server
   yum:
-    name: named 
+    name: bind bind-utils
     state: present
