@@ -1,6 +1,7 @@
 ---
 
 
-- name: add to the list
+- name: Setup Packages DNS
   include: setup.yml
+- name: Install DNS Server
   include: install.yml

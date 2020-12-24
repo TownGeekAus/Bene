@@ -31,16 +31,21 @@
 
 - name: Copy 200.56.121 file to the host
   copy:
-    src: named.conf.j2
-    dest: /etc/named.conf
+    src: 200.56.121.j2
+    dest: /var/named/200.56.121
     owner: root
     group: named
-    mode:  '640'
+    mode:  '644'
 
 - name: Copy 200.94.47 file to the host
   copy:
-    src: named.conf.j2
-    dest: /etc/named.conf
+    src:   200.94.47.j2
+    dest: /var/named/200.94.47
     owner: root
     group: named
-    mode:  '640'
+    mode:  '644'
+
+- name: Restart Named Service
+  systemd:
+    state: restarted
+    name: named
