@@ -1,0 +1,30 @@
+$TTL 86400
+
+@     IN      SOA    mail.bene.com.mx.      lacuna.bene.com.mx. (
+                        2020122407      ; serial number YYMMDDNN
+                        28800           ; Refresh
+                        7200            ; Retry
+                        864000          ; Expire
+                        86400           ; Min TTL
+                        )
+
+$ORIGIN bene.com.mx.
+
+
+bene.com.mx.           IN      TXT "google-site-verification=_MpSt8vI3koT5w7qDczDlCejr-3r1PXa84dcJFLwL1g"
+_dmarc.bene.com.mx.    IN      TXT "v=DMARC1; p=none; sp=none; rua=mailto:lacuna@bene.com.mx; ruf=mailto:lacuna@bene.com.mx; rf=iodef; pct=100; ri=86400"
+_xmpp-client._tcp.bene.com.mx. 86400 IN SRV 0 5 5222 mail.bene.com.mx.
+_xmpp-server._tcp.bene.com.mx. 86400 IN SRV 0 5 5269 mail.bene.com.mx.
+@                       IN      TXT     "v=spf1 a mx ptr a:mail.bene.com.mx mx:mail.bene.com.mx ip4:200.94.47.49 ~all"
+#@                      IN      TXT     "v=spf1 a mx ptr a:mail2.bene.com.mx mx:mail2.bene.com.mx ip4:200.56.121.6 -all"
+@                       IN      NS      mail.bene.com.mx.
+#@                      IN      NS      ns1.bene.com.mx.
+bene.com.mx.            IN      MX      10 mail.bene.com.mx.
+bene.com.mx.            IN      MX      20 mail2.bene.com.mx.
+ns1                     IN      A       200.94.47.49
+www                     IN      A       132.148.236.158
+bene.com.mx.            IN      A       132.148.236.158
+mail                    IN      A       200.94.47.49
+systembene              IN      A       189.206.134.5
+kibana                  IN      A       200.94.47.49
+mail2                   IN      A       200.56.121.6

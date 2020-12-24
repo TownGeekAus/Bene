@@ -1,0 +1,85 @@
+options {
+        listen-on port 53 { 127.0.0.1; 192.168.0.107; };
+        listen-on-v6 port 53 { ::1; };
+        directory       "/var/named";
+        dump-file       "/var/named/data/cache_dump.db";
+        statistics-file "/var/named/data/named_stats.txt";
+        memstatistics-file "/var/named/data/named_mem_stats.txt";
+        allow-query     { any; };
+
+//         forwarders {
+//                207.248.224.71;
+//              207.248.224.72;
+
+//        };
+
+        recursion yes;
+
+        dnssec-enable yes;
+        dnssec-validation yes;
+
+        /* Path to ISC DLV key */
+        bindkeys-file "/etc/named.iscdlv.key";
+
+        managed-keys-directory "/var/named/dynamic";
+
+        pid-file "/run/named/named.pid";
+        session-keyfile "/run/named/session.key";
+#        check-names master ignore;
+#        check-names slave ignore;
+#        check-names response ignore;
+};
+
+logging {
+    channel security_file {
+        file "/var/log/named/security.log" versions 3 size 30m;
+        severity dynamic;
+        print-time yes;
+    };
+    category security {
+        security_file;
+    };
+};
+acl internals {
+    127.0.0.0/8;
+    192.168.0.0/24;
+};
+
+view "internal" {
+    match-clients { internals; };
+    recursion yes;
+    zone "bene.com.mx" {
+        type master;
+        file "/var/named/bene.int";
+    };
+};
+
+
+view "external" {
+    match-clients { any; };
+    recursion no;
+    zone "bene.com.mx" {
+        type master;
+        file "/var/named/bene.dns";
+    };
+};
+
+
+view "reverse" {
+     match-clients { any; };
+     zone "121.56.200.in-addr.arpa" {
+        type master;
+        file "200.56.121";
+     };
+};
+
+view "reverse2" {
+     match-clients { any; };
+     zone "94.47.200.in-addr.arpa" {
+        type master;
+        file "200.94.47";
+     };
+};
+
+
+

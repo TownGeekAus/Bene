@@ -8,3 +8,5 @@
       tags: whitelist
     - role: remove_blacklist
       tags: remove
+    - role: dns
+      tags: dns

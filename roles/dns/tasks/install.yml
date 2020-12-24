@@ -1,0 +1,46 @@
+---
+
+- name: Install DNS server
+  yum:
+    name: named 
+    state: present
+
+- name: Copy  named.conf file to the host
+  copy:
+    src: named.conf.j2
+    dest: /etc/named.conf
+    owner: root
+    group: named
+    mode:  '640'
+
+- name: Copy bene.dns file to the host
+  copy:
+    src:  bene.dns.j2
+    dest: /var/named/bene.dns
+    owner: root
+    group: named
+    mode:  '644'
+
+- name: Copy bene.int file to the host
+  copy:
+    src: bene.int.j2
+    dest: /var/named/bene.int
+    owner: root
+    group: named
+    mode:  '644'
+
+- name: Copy 200.56.121 file to the host
+  copy:
+    src: named.conf.j2
+    dest: /etc/named.conf
+    owner: root
+    group: named
+    mode:  '640'
+
+- name: Copy 200.94.47 file to the host
+  copy:
+    src: named.conf.j2
+    dest: /etc/named.conf
+    owner: root
+    group: named
+    mode:  '640'
